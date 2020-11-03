@@ -16,3 +16,12 @@ Ready to run in production? Please [check our deployment guides](https://hexdocs
   * Docs: https://hexdocs.pm/phoenix
   * Forum: https://elixirforum.com/c/phoenix-forum
   * Source: https://github.com/phoenixframework/phoenix
+
+### Notes
+
+```
+HTTPoison.start 
+{:ok, %HTTPoison.Response{body: body}} = HTTPoison.get("https://joelholmes.dev/posts/index.xml")  
+{:ok, feed, _} = FeederEx.parse(body)
+Enum.map feed.entries, fn(entry) -> %{id: (:crypto.hash(:sha256, entry.id) |> Base.encode16()) , url: entry.link, updated: entry.updated} end 
+```
