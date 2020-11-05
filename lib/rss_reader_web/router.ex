@@ -17,8 +17,13 @@ defmodule RssReaderWeb.Router do
   scope "/", RssReaderWeb do
     pipe_through :browser
 
-    live "/", EntriesLive
-    live "/sources", SourcesLive
+    live "/sources", SourceLive.Index, :index
+    live "/sources/new", SourceLive.Index, :new
+    live "/sources/:id/edit", SourceLive.Index, :edit
+
+    live "/sources/:id", SourceLive.Show, :show
+    live "/sources/:id/show/edit", SourceLive.Show, :edit
+
   end
 
   # Other scopes may use custom stacks.

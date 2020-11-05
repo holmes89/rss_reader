@@ -1,0 +1,49 @@
+<h1>Listing Entries</h1>
+
+<%= if @live_action in [:new, :edit] do %>
+  <%= live_modal @socket, RssReaderWeb.EntryLive.FormComponent,
+    id: @entry.id || :new,
+    title: @page_title,
+    action: @live_action,
+    entry: @entry,
+    return_to: Routes.entry_index_path(@socket, :index) %>
+<% end %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Uuid</th>
+      <th>Name</th>
+      <th>Url</th>
+      <th>Entry date</th>
+      <th>Img</th>
+      <th>Description</th>
+      <th>Favorited</th>
+      <th>Read</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody id="entries">
+    <%= for entry <- @entries do %>
+      <tr id="entry-<%= entry.id %>">
+        <td><%= entry.uuid %></td>
+        <td><%= entry.name %></td>
+        <td><%= entry.url %></td>
+        <td><%= entry.entry_date %></td>
+        <td><%= entry.img %></td>
+        <td><%= entry.description %></td>
+        <td><%= entry.favorited %></td>
+        <td><%= entry.read %></td>
+
+        <td>
+          <span><%= live_redirect "Show", to: Routes.entry_show_path(@socket, :show, entry) %></span>
+          <span><%= live_patch "Edit", to: Routes.entry_index_path(@socket, :edit, entry) %></span>
+          <span><%= link "Delete", to: "#", phx_click: "delete", phx_value_id: entry.id, data: [confirm: "Are you sure?"] %></span>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<span><%= live_patch "New Entry", to: Routes.entry_index_path(@socket, :new) %></span>
