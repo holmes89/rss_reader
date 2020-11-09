@@ -14,15 +14,6 @@ defmodule RssReaderWeb.SourceLive.FormComponent do
   end
 
   @impl true
-  def handle_event("validate", %{"source" => source_params}, socket) do
-    changeset =
-      socket.assigns.source
-      |> Feeds.change_source(source_params)
-      |> Map.put(:action, :validate)
-
-    {:noreply, assign(socket, :changeset, changeset)}
-  end
-
   def handle_event("save", %{"source" => source_params}, socket) do
     save_source(socket, socket.assigns.action, source_params)
   end

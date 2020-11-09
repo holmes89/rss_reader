@@ -1,4 +1,4 @@
-defmodule RssReader.Application do
+defmodule RssReaderWeb.Application do
   # See https://hexdocs.pm/elixir/Application.html
   # for more information on OTP Applications
   @moduledoc false
@@ -7,21 +7,17 @@ defmodule RssReader.Application do
 
   def start(_type, _args) do
     children = [
-      # Start the Ecto repository
-      RssReader.Repo,
       # Start the Telemetry supervisor
       RssReaderWeb.Telemetry,
-      # Start the PubSub system
-      {Phoenix.PubSub, name: RssReader.PubSub},
       # Start the Endpoint (http/https)
       RssReaderWeb.Endpoint
-      # Start a worker by calling: RssReader.Worker.start_link(arg)
-      # {RssReader.Worker, arg}
+      # Start a worker by calling: RssReaderWeb.Worker.start_link(arg)
+      # {RssReaderWeb.Worker, arg}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
     # for other strategies and supported options
-    opts = [strategy: :one_for_one, name: RssReader.Supervisor]
+    opts = [strategy: :one_for_one, name: RssReaderWeb.Supervisor]
     Supervisor.start_link(children, opts)
   end
 

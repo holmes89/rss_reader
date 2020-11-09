@@ -1,22 +1,29 @@
-# This file is responsible for configuring your application
-# and its dependencies with the aid of the Mix.Config module.
+# This file is responsible for configuring your umbrella
+# and **all applications** and their dependencies with the
+# help of Mix.Config.
 #
-# This configuration file is loaded before any dependency and
-# is restricted to this project.
-
-# General application configuration
+# Note that all applications in your umbrella share the
+# same configuration and dependencies, which is why they
+# all use the same configuration file. If you want different
+# configurations or dependencies per app, it is best to
+# move said applications out of the umbrella.
 use Mix.Config
 
+# Configure Mix tasks and generators
 config :rss_reader,
   ecto_repos: [RssReader.Repo]
 
+config :rss_reader_web,
+  ecto_repos: [RssReader.Repo],
+  generators: [context_app: :rss_reader]
+
 # Configures the endpoint
-config :rss_reader, RssReaderWeb.Endpoint,
+config :rss_reader_web, RssReaderWeb.Endpoint,
   url: [host: "localhost"],
-  secret_key_base: "GHEegNmRwqzlP1szD54PBrMvUqWIievJWn+/pO+gEFZdec0SKqKBoZPqS5331Dsn",
+  secret_key_base: "Km6TPmxXx4UO5T/ao0LarWr92Cu3u3r3nspa2D3y7yvAN1nBrCrhm0bTpb4AgRjJ",
   render_errors: [view: RssReaderWeb.ErrorView, accepts: ~w(html json), layout: false],
   pubsub_server: RssReader.PubSub,
-  live_view: [signing_salt: "7sckZOjJ"]
+  live_view: [signing_salt: "qbD9j50w"]
 
 # Configures Elixir's Logger
 config :logger, :console,

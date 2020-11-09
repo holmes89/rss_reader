@@ -20,5 +20,5 @@ defmodule RssReaderWeb.Gettext do
 
   See the [Gettext Docs](https://hexdocs.pm/gettext) for detailed usage.
   """
-  use Gettext, otp_app: :rss_reader
+  use Gettext, otp_app: :rss_reader_web
 end

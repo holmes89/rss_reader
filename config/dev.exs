@@ -15,7 +15,7 @@ config :rss_reader, RssReader.Repo,
 # The watchers configuration can be used to run external
 # watchers to your application. For example, we use it
 # with webpack to recompile .js and .css sources.
-config :rss_reader, RssReaderWeb.Endpoint,
+config :rss_reader_web, RssReaderWeb.Endpoint,
   http: [port: 4000],
   debug_errors: true,
   code_reloader: true,
@@ -26,7 +26,7 @@ config :rss_reader, RssReaderWeb.Endpoint,
       "--mode",
       "development",
       "--watch-stdin",
-      cd: Path.expand("../assets", __DIR__)
+      cd: Path.expand("../apps/rss_reader_web/assets", __DIR__)
     ]
   ]
 
@@ -55,7 +55,7 @@ config :rss_reader, RssReaderWeb.Endpoint,
 # different ports.
 
 # Watch static and templates for browser reloading.
-config :rss_reader, RssReaderWeb.Endpoint,
+config :rss_reader_web, RssReaderWeb.Endpoint,
   live_reload: [
     patterns: [
       ~r"priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$",
@@ -68,9 +68,9 @@ config :rss_reader, RssReaderWeb.Endpoint,
 # Do not include metadata nor timestamps in development logs
 config :logger, :console, format: "[$level] $message\n"
 
+# Initialize plugs at runtime for faster development compilation
+config :phoenix, :plug_init_mode, :runtime
+
 # Set a higher stacktrace during development. Avoid configuring such
 # in production as building large stacktraces may be expensive.
 config :phoenix, :stacktrace_depth, 20
-
-# Initialize plugs at runtime for faster development compilation
-config :phoenix, :plug_init_mode, :runtime
