@@ -6,9 +6,8 @@ defmodule RssReader.Repo.Migrations.CreateEntries do
       add :uuid, :string, primary_key: true
       add :name, :string
       add :url, :string
-      add :entry_date, :date
-      add :img, :string
-      add :description, :string
+      add :img, :string, null: true
+      add :description, :text
       add :favorited, :boolean, default: false, null: false
       add :read, :boolean, default: false, null: false
       add :source, references(:sources, on_delete: :nothing)

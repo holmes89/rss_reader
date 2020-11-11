@@ -1,4 +1,4 @@
-defmodule FeedWatcher.Application do
+defmodule FeedFetcher.Application do
   # See https://hexdocs.pm/elixir/Application.html
   # for more information on OTP Applications
   @moduledoc false
@@ -7,14 +7,13 @@ defmodule FeedWatcher.Application do
 
   def start(_type, _args) do
     children = [
-      # Starts a worker by calling: FeedWatcher.Worker.start_link(arg)
-      # {FeedWatcher, name: FeedWatcher},
-      {FeedFetcher, name: FeedFetcher}
+      # Starts a worker by calling: FeedFetcher.Worker.start_link(arg)
+      # {FeedFetcher.Worker, arg}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
     # for other strategies and supported options
-    opts = [strategy: :one_for_one, name: FeedWatcher.Supervisor]
+    opts = [strategy: :one_for_one, name: FeedFetcher.Supervisor]
     Supervisor.start_link(children, opts)
   end
 end

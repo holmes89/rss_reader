@@ -148,7 +148,7 @@ defmodule RssReader.Feeds do
   def create_entry(attrs \\ %{}) do
     %Entry{}
     |> Entry.changeset(attrs)
-    |> Repo.insert()
+    |> Repo.insert(on_conflict: :nothing)
   end
 
   @doc """

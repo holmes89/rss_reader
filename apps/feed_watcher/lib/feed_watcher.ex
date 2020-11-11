@@ -1,42 +1,37 @@
 defmodule FeedWatcher do
   use GenServer
-  @moduledoc """
-  Documentation for `FeedWatcher`.
-  """
 
-  @doc """
-  Fetch data from endpoint.
+  alias RssReader.Feeds
 
-  ## Examples
+  # @name FeedWatcher
 
-      iex> FeedWatcher.fetch(endpoint)
-      fetchs data from endpoint
+  ## Client API
 
-  """
-  def fetch(endpoint) do
-
+  def start_link(opts \\ []) do
+    GenServer.start_link(__MODULE__, :ok, opts ++ [name: FeedWatcher])
   end
 
+  # Server
+
+  @impl true
   def init(endpoint) do
-    HTTPoison.start
     send(self(), :poll) # Immediately schedule the first poll
     {:ok, endpoint}
   end
 
+  @impl true
   def handle_info(:fetch, endpoint) do
-    {:ok, %HTTPoison.Response{body: body}} = HTTPoison.get(endpoint)
-    {:ok, feed, _} = FeederEx.parse(body)
-    results = Enum.map feed.entries, fn(entry) -> %{id: (:crypto.hash(:sha256, entry.link) |> Base.encode16()) , url: entry.link, updated: entry.updated} end
-    # IO.inspect results
+    Enum.map Feeds.list_sources(), fn x -> GenServer.cast(FeedFetcher, %{source_id: x.id, endpoint: x.url}) end
     {:noreply, endpoint}
   end
 
+  @impl true
   def handle_info(:poll, state) do
 
     send(self(), :fetch) # Immediately schedule the first poll
 
     # Re-schedule the next poll in 1 minute (60_000 ms):
-    Process.send_after(self, :poll, 60_000)
+    Process.send_after(self(), :poll, 60_000)
 
     {:noreply, state}
   end

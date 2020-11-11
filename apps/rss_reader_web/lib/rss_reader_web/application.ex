@@ -7,12 +7,9 @@ defmodule RssReaderWeb.Application do
 
   def start(_type, _args) do
     children = [
-      # Start the Telemetry supervisor
       RssReaderWeb.Telemetry,
-      # Start the Endpoint (http/https)
-      RssReaderWeb.Endpoint
-      # Start a worker by calling: RssReaderWeb.Worker.start_link(arg)
-      # {RssReaderWeb.Worker, arg}
+      RssReaderWeb.Endpoint,
+      {FeedWatcher, name: FeedWatcher}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

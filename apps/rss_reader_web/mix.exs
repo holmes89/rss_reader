@@ -48,6 +48,8 @@ defmodule RssReaderWeb.MixProject do
       {:telemetry_poller, "~> 0.4"},
       {:gettext, "~> 0.11"},
       {:rss_reader, in_umbrella: true},
+      {:feed_fetcher, in_umbrella: true},
+      {:feed_watcher, in_umbrella: true},
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"}
     ]
