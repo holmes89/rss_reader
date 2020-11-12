@@ -17,7 +17,7 @@ defmodule RssReaderWeb.Router do
   scope "/", RssReaderWeb do
     pipe_through :browser
 
-    live "/", PageLive, :index
+    live "/", EntryLive.Index, :index
 
     live "/sources", SourceLive.Index, :index
     live "/sources/new", SourceLive.Index, :new
@@ -25,13 +25,6 @@ defmodule RssReaderWeb.Router do
 
     live "/sources/:id", SourceLive.Show, :show
     live "/sources/:id/show/edit", SourceLive.Show, :edit
-
-    live "/entries", EntryLive.Index, :index
-    live "/entries/new", EntryLive.Index, :new
-    live "/entries/:id/edit", EntryLive.Index, :edit
-
-    live "/entries/:id", EntryLive.Show, :show
-    live "/entries/:id/show/edit", EntryLive.Show, :edit
 
 
   end

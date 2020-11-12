@@ -3,6 +3,7 @@ defmodule FeedFetcher do
 
   alias RssReader.Feeds.Entry
   alias RssReader.Feeds
+  alias Ecto.DateTime
 
   @name FeedFetcher
 
@@ -28,7 +29,7 @@ defmodule FeedFetcher do
   def handle_cast(%{source_id: source_id, endpoint: endpoint}, _stats) do
     case fetch_entries(source_id, endpoint) do
       {:ok, results} ->
-        Enum.map results, fn(entry) -> Feeds.create_entry(entry) end
+        Feeds.batch_create_entry(results)
         {:noreply, results}
       _ ->
         {:noreply, :error}
@@ -46,7 +47,9 @@ defmodule FeedFetcher do
       img: entry.image,
       name: entry.title,
       source: source_id,
-      url: entry.link} end
+      url: entry.link,
+      inserted_at: NaiveDateTime.truncate(NaiveDateTime.utc_now(), :second),
+      updated_at: NaiveDateTime.truncate(NaiveDateTime.utc_now(), :second)} end
     {:ok, results}
   end
 

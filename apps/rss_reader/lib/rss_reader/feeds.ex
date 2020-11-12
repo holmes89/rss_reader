@@ -4,6 +4,7 @@ defmodule RssReader.Feeds do
   """
 
   import Ecto.Query, warn: false
+  alias Ecto.DateTime
   alias RssReader.Repo
 
   alias RssReader.Feeds.Source
@@ -150,6 +151,15 @@ defmodule RssReader.Feeds do
     |> Entry.changeset(attrs)
     |> Repo.insert(on_conflict: :nothing)
   end
+
+
+  @doc """
+  Batch insert entry.
+  """
+  def batch_create_entry(attrs \\ []) do
+     Repo.insert_all(Entry, attrs, on_conflict: :nothing)
+  end
+
 
   @doc """
   Updates a entry.
