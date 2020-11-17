@@ -23,9 +23,6 @@ defmodule RssReaderWeb.Router do
     live "/sources/new", SourceLive.Index, :new
     live "/sources/:id/edit", SourceLive.Index, :edit
 
-    live "/sources/:id", SourceLive.Show, :show
-    live "/sources/:id/show/edit", SourceLive.Show, :edit
-
 
   end
 

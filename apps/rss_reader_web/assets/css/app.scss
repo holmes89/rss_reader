@@ -1,6 +1,17 @@
 /* This file is for your main application css. */
-@import "./phoenix.css";
 @import "../node_modules/nprogress/nprogress.css";
+@import "./bulma/bulma.sass";
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Raleway&display=swap');
+@import "./fontawesome/scss/fontawesome.scss";
+
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Raleway', sans-serif;
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+}
 
 /* LiveView specific classes for your customizations */
 .invalid-feedback {

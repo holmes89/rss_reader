@@ -11,18 +11,17 @@
   </head>
   <body>
     <header>
-      <section class="container">
-        <nav role="navigation">
-          <ul>
-            <li><a href="https://hexdocs.pm/phoenix/overview.html">Get Started</a></li>
-            <%= if function_exported?(Routes, :live_dashboard_path, 2) do %>
-              <li><%= link "LiveDashboard", to: Routes.live_dashboard_path(@conn, :home) %></li>
-            <% end %>
-          </ul>
-        </nav>
-        <a href="https://phoenixframework.org/" class="phx-logo">
-          <img src="<%= Routes.static_path(@conn, "/images/phoenix.png") %>" alt="Phoenix Framework Logo"/>
-        </a>
+      <section class="hero">
+        <div class="hero-body">
+          <div class="container">
+            <a href="/" class="is-pulled-left">
+              <h1 class="title">
+                Feed
+              </h1>
+            </a>
+            <a href="/sources" class="button is-pulled-right">Sources</a>
+          </div>
+        </div>
       </section>
     </header>
     <%= @inner_content %>

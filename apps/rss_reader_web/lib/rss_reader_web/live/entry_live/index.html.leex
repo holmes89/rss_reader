@@ -1,11 +1,24 @@
-<h1>Feed</h1>
 
-<table>
-  <tbody id="entries">
+<div class="column is-8 centered">
     <%= for entry <- @entries do %>
-      <tr id="entry-<%= entry.uuid %>">
-        <td><a href="<%= entry.url %>"><%= entry.name %></td>
-      </tr>
+        <div class="card mb-3">
+            <div class="card-content">
+                <article class="media">
+                    <div class="media-content">
+                        <div class="content">
+                            <a href="<%= entry.url %>"><h5><%= entry.name %></h5></a>
+                        </div>
+                        <nav class="level">
+                            <div class="level-left">
+                                <a class="level-item">
+                                    <span class="icon is-small"><i class="<%= if entry.favorited do: fas, else far end %> fa-heart"></i></span>
+                                    <span class="icon is-small"><i class="fas fa-share-alt"></i></span>
+                                </a>
+                            </div>
+                        </nav>
+                    </div>
+                </article>
+            </div>
+        </div>
     <% end %>
-  </tbody>
-</table>
+</div>

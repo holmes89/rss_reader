@@ -1,15 +1,14 @@
-<h1>Listing Sources</h1>
-
 <%= if @live_action in [:new, :edit] do %>
   <%= live_modal @socket, RssReaderWeb.SourceLive.FormComponent,
     id: @source.id || :new,
     title: @page_title,
     action: @live_action,
     source: @source,
+    name: @source.name,
     return_to: Routes.source_index_path(@socket, :index) %>
 <% end %>
 
-<table>
+<table class="table">
   <thead>
     <tr>
       <th>Name</th>
@@ -25,7 +24,6 @@
         <td><%= source.url %></td>
 
         <td>
-          <span><%= live_redirect "Show", to: Routes.source_show_path(@socket, :show, source) %></span>
           <span><%= live_patch "Edit", to: Routes.source_index_path(@socket, :edit, source) %></span>
           <span><%= link "Delete", to: "#", phx_click: "delete", phx_value_id: source.id, data: [confirm: "Are you sure?"] %></span>
         </td>

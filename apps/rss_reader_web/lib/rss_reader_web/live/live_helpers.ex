@@ -17,7 +17,7 @@ defmodule RssReaderWeb.LiveHelpers do
   """
   def live_modal(socket, component, opts) do
     path = Keyword.fetch!(opts, :return_to)
-    modal_opts = [id: :modal, return_to: path, component: component, opts: opts]
+    modal_opts = [id: :modal, return_to: path, component: component, opts: opts, active: true]
     live_component(socket, RssReaderWeb.ModalComponent, modal_opts)
   end
 end
